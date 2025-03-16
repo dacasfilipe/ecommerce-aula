@@ -38,5 +38,11 @@ public class UserController {
         List<UserDTO> users = userService.listUsers();
         return ResponseEntity.ok(users);
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<UserDTO>> searchUsers(@RequestParam String name) {
+        List<UserDTO> users = userService.searchUsers(name);
+        return ResponseEntity.ok(users);
+    }
 }
 

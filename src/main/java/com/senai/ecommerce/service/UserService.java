@@ -49,6 +49,11 @@ public class UserService {
         return users.stream().map(this::userToUserDTO).collect(Collectors.toList());
     }
 
+    public List<UserDTO> searchUsers(String searchTerm) {
+        List<User> users = userRepository.searchByName(searchTerm);
+        return users.stream().map(this::userToUserDTO).collect(Collectors.toList());
+    }
+
     private UserDTO userToUserDTO(User user) {
         return new UserDTO(user.getId(), user.getName(), user.getEmail(), user.getPhone(), user.getBirthDate(), user.getRoles());
     }
