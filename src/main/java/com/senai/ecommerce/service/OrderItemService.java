@@ -92,4 +92,11 @@ public class OrderItemService {
         entity.setQuantity(dto.getQuantity());
         entity.setPrice(dto.getPrice());
     }
+
+    @Transactional(readOnly = true)
+    public List<OrderItemDTO> findByOrderId(Long orderId) {
+        return repository.findByOrderId(orderId).stream()
+                .map(OrderItemDTO::new)
+                .collect(Collectors.toList());
+    }
 }

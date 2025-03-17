@@ -7,6 +7,7 @@ import lombok.Data;
 public class OrderItemDTO {
     private Long orderId;
     private Long productId;
+    private String productName;
     private int quantity;
     private double price;
 
@@ -16,6 +17,7 @@ public class OrderItemDTO {
     public OrderItemDTO(OrderItem entity) {
         this.orderId = entity.getId().getOrder().getId();
         this.productId = entity.getId().getProduct().getId();
+        this.productName = entity.getId().getProduct().getName();
         this.quantity = entity.getQuantity();
         this.price = entity.getPrice();
     }

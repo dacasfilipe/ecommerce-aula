@@ -7,8 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@CrossOrigin(origins = "http://127.0.0.1:5500")
-
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {
@@ -45,5 +43,9 @@ public class ProductController {
         return ResponseEntity.noContent().build();
     }
 
-
+    @GetMapping("/search")
+    public ResponseEntity<List<ProductDTO>> searchProducts(@RequestParam String name) {
+        List<ProductDTO> products = productService.searchByName(name);
+        return ResponseEntity.ok(products);
+    }
 }

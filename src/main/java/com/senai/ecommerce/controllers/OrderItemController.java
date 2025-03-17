@@ -9,10 +9,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-@CrossOrigin(origins = "http://127.0.0.1:5500")
-
 @RestController
-@RequestMapping(value = "/api/order-items")
+@RequestMapping(value = "/api/orderitems")
 public class OrderItemController {
 
     @Autowired
@@ -52,5 +50,11 @@ public class OrderItemController {
     public ResponseEntity<Void> delete(@PathVariable Long orderId, @PathVariable Long productId) {
         service.delete(orderId, productId);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/by-order/{orderId}")
+    public ResponseEntity<List<OrderItemDTO>> findByOrderId(@PathVariable Long orderId) {
+        List<OrderItemDTO> items = service.findByOrderId(orderId);
+        return ResponseEntity.ok().body(items);
     }
 }

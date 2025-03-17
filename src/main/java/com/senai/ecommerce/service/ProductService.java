@@ -107,4 +107,10 @@ public class ProductService {
 //    private Product toEntity(ProductDTO productDTO) {
 //        return new Product(productDTO.getName(), productDTO.getDescription(), productDTO.getPrice(), productDTO.getImgUrl(), productDTO.getCategories());
 //    }
+
+    @Transactional(readOnly = true)
+    public List<ProductDTO> searchByName(String name) {
+        List<Product> products = productRepository.findByNameContainingIgnoreCase(name);
+        return products.stream().map(this::productToProductDTO).collect(Collectors.toList());
+    }
 }
