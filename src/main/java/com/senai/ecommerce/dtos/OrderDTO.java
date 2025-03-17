@@ -12,6 +12,7 @@ public class OrderDTO {
     private LocalDateTime moment;
     private OrderStatus status;
     private Long userId;
+    private String userName;
     private Long paymentId;
 
     public OrderDTO() {
@@ -22,6 +23,7 @@ public class OrderDTO {
         this.moment = entity.getMoment();
         this.status = entity.getStatus();
         this.userId = entity.getUser().getId();
+        this.userName = entity.getUser().getName();
         this.paymentId = entity.getPayment() != null ? entity.getPayment().getId() : null;
     }
 }

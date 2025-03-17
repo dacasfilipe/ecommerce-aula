@@ -69,6 +69,17 @@ public class OrderService {
         repository.deleteById(id);
     }
 
+    @Transactional(readOnly = true)
+    public List<OrderDTO> findByUser(Long userId) {
+        List<Order> orders = repository.findByUserId(userId);
+        return orders.stream()
+                .map(order -> {
+                    org.hibernate.Hibernate.initialize(order.getItems());
+                    return new OrderDTO(order);
+                })
+                .collect(Collectors.toList());
+    }
+
     private void copyDtoToEntity(OrderDTO dto, Order entity) {
         entity.setMoment(dto.getMoment());
         entity.setStatus(dto.getStatus());

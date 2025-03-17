@@ -47,4 +47,10 @@ public class OrderController {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/by-user/{userId}")
+    public ResponseEntity<List<OrderDTO>> findByUser(@PathVariable Long userId) {
+        List<OrderDTO> orders = service.findByUser(userId);
+        return ResponseEntity.ok(orders);
+    }
 }
